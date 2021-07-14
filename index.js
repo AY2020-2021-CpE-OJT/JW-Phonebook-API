@@ -7,7 +7,7 @@ const port = process.env.PORT || 8080;
 
 //Import Routes
 const authRoute = require('./routes/auth');
-const postRoute = require('./routes/posts')
+const contactsRoute = require('./routes/contacts')
 dotenv.config();
 
 app.listen(port, () => {
@@ -21,4 +21,4 @@ app.use(express.json());
 
 //Route Middleware
 app.use('/api/user', authRoute);
-app.use('/api/posts', postRoute);
+app.use('/api/posts', contactsRoute);
