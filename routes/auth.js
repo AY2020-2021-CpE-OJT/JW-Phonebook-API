@@ -15,13 +15,13 @@ router.post('/register', async (req, res) => {
     const {
         error
     } = registerValidation(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+    if (error) return res.status(400).json({'error': error.details[0].message});
 
     //CHECK IF USER ALREADY EXIST
     const emailExist = await User.findOne({
         email: req.body.email
     });
-    if (emailExist) return res.status(400).send('Email already exists');
+    if (emailExist) return res.status(400).json({'error': 'Email Already Exist'});
 
     //HASH PASSWORDS
     const salt = await bcrypt.genSalt(10);
@@ -35,11 +35,9 @@ router.post('/register', async (req, res) => {
     });
     try {
         const savedUser = await user.save();
-        res.send({
-            user: user._id
-        });
+        res.status(200).json({'message': 'Account Created Successfully'});
     } catch (err) {
-        res.status(400).send(err);
+        res.status(400).json({'error': err});
     }
 });
 

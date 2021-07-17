@@ -19,4 +19,10 @@
 >	 * Routes have a verification
 >	 * Create and Update contact routes have validation
 
+># Update v.0.3
+>
+>- **User Verification** and **Authentication Response**
+>	 * Change responses into JSON format
+>	 * Add Status codes
+
 <i class="fa fa-refresh fa-spin fa-1x"></i> &nbsp;**In Progress**
