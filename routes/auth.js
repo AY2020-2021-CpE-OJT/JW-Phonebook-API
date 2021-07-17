@@ -49,21 +49,21 @@ router.post('/login', async (req, res) => {
     const {
         error
     } = loginValidation(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+    if (error) return res.status(400).json({'error': error.details[0].message});
     //CHECK IF EMAIL EXISTS
     const user = await User.findOne({
         email: req.body.email
     });
-    if (!user) return res.status(400).send('Email is wrong');
+    if (!user) return res.status(400).json({'error': 'Email is wrong'});
     //CHECK IF PASSWORD IS CORRECT
     const validPass = await bcrypt.compare(req.body.password, user.password);
-    if (!validPass) return res.status(400).send('Password is wrong');
+    if (!validPass) return res.status(400).json({'error': 'Password is wrong'});
 
     //CREATE AND ASSIGN TOKEN
     const token = jwt.sign({
         _id: user._id
     }, process.env.TOKEN_SECRET);
-    res.header('auth-token', token).send(token);
+    res.status(200).json({'auth-token': token});
 
 });
 
