@@ -8,7 +8,12 @@ const {
 //Get all routes
 router.get('/', verify, async (req, res) => {
     const findContacts = await Contacts.find()
-    res.json(findContacts);
+    if (findContacts != 0) {
+        res.json(findContacts);
+    } else {
+        return res.status(400).json({ 'error': 'DB is empty' });
+    }
+
 });
 
 //CREATE NEW CONTACT
@@ -25,7 +30,7 @@ router.post('/new', verify, async (req, res) => {
         first_name: req.body.first_name,
         last_name: req.body.last_name,
     });
-    if (contactExist) return res.status(400).send('Contact already exists');
+    if (contactExist) return res.status(400).json({ 'error': 'Contact Already Exists' });
 
     //CREATING CONTACT
     const contact = new Contacts({
@@ -67,7 +72,7 @@ router.patch('/update/:id', verify, async (req, res) => {
     const {
         error
     } = contactValidation(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+    if (error) return res.status(400).json({ 'error': error.details[0].message });
 
     //CHECK IF CONTACT ALREADY EXIST
     const contactExist = await Contacts.findOne({
@@ -77,7 +82,7 @@ router.patch('/update/:id', verify, async (req, res) => {
             $ne: req.params.id
         }
     });
-    if (contactExist) return res.status(400).send('Contact already exists');
+    if (contactExist) return res.status(400).json({ 'error': 'Contact Already Exists' });
 
     //UPDATING CONTACT
     try {
@@ -90,12 +95,9 @@ router.patch('/update/:id', verify, async (req, res) => {
                 phone_numbers: req.body.phone_numbers,
             }
         });
-        res.send({
-            contact: req.params.id,
-            status: "Updated"
-        });
+        res.json({ 'message': 'Contact Updated' });
     } catch (err) {
-        res.status(400).send(err);
+        res.status(400).json({ 'error': err });
     }
 });
 

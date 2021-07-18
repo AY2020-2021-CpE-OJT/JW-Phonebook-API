@@ -15,13 +15,13 @@ router.post('/register', async (req, res) => {
     const {
         error
     } = registerValidation(req.body);
-    if (error) return res.status(400).json({'error': error.details[0].message});
+    if (error) return res.status(400).json({ 'error': error.details[0].message });
 
     //CHECK IF USER ALREADY EXIST
     const emailExist = await User.findOne({
         email: req.body.email
     });
-    if (emailExist) return res.status(400).json({'error': 'Email Already Exist'});
+    if (emailExist) return res.status(400).json({ 'error': 'Email Already Exist' });
 
     //HASH PASSWORDS
     const salt = await bcrypt.genSalt(10);
@@ -35,9 +35,9 @@ router.post('/register', async (req, res) => {
     });
     try {
         const savedUser = await user.save();
-        res.status(200).json({'message': 'Account Created Successfully'});
+        res.status(200).json({ 'message': 'Account Created Successfully' });
     } catch (err) {
-        res.status(400).json({'error': err});
+        res.status(400).json({ 'error': err });
     }
 });
 
@@ -47,21 +47,21 @@ router.post('/login', async (req, res) => {
     const {
         error
     } = loginValidation(req.body);
-    if (error) return res.status(400).json({'error': error.details[0].message});
+    if (error) return res.status(400).json({ 'error': error.details[0].message });
     //CHECK IF EMAIL EXISTS
     const user = await User.findOne({
         email: req.body.email
     });
-    if (!user) return res.status(400).json({'error': 'Email is wrong'});
+    if (!user) return res.status(400).json({ 'error': 'Email/Password is wrong!' });
     //CHECK IF PASSWORD IS CORRECT
     const validPass = await bcrypt.compare(req.body.password, user.password);
-    if (!validPass) return res.status(400).json({'error': 'Password is wrong'});
+    if (!validPass) return res.status(400).json({ 'error': 'Email/Password is wrong!' });
 
     //CREATE AND ASSIGN TOKEN
     const token = jwt.sign({
         _id: user._id
     }, process.env.TOKEN_SECRET);
-    res.status(200).json({'auth-token': token});
+    res.status(200).json({ 'auth-token': token });
 
 });
 

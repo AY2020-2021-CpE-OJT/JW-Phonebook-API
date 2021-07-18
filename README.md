@@ -2,7 +2,7 @@
 # JW-Phonebook-API
 **REST API** for the **Phonebook Application**. This serves as the **backend** of the Phonebook Application using **Node.js, Express, Mongoose, and MongoDB Atlas**. It uses **JSON Web Tokens** Libraries for Token Signing/Verification
 
-# Summary
+# Logs
 
 ># Initial State v.0.1
 >
