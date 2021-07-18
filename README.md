@@ -25,4 +25,9 @@
 >	 * Change responses into JSON format
 >	 * Add Status codes
 
+># Update v.0.4
+>
+>- **Cross-Origin Resource Sharing**
+>	 * Add CORS to enable Web to access local API 
+
 <i class="fa fa-refresh fa-spin fa-1x"></i> &nbsp;**In Progress**
