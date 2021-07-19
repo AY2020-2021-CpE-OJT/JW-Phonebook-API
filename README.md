@@ -48,4 +48,4 @@
 #### Open for Revisions
 
 - **Author's note:**
-	 * Codes are far from perfect, but working as it should. 
+	 * Codes are far from perfect, but working as it should.
