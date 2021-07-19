@@ -6,7 +6,6 @@ const mongoose = require('mongoose');
 
 const port = process.env.PORT || 8080;
 
-app.use(cors())
 
 //Import Routes
 const authRoute = require('./routes/auth');
@@ -21,6 +20,7 @@ require('./initDB')();
 
 //Middleware
 app.use(express.json());
+app.use(cors());
 
 //Route Middleware
 app.use('/api/user', authRoute);

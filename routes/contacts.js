@@ -7,7 +7,7 @@ const {
 
 //Get all routes
 router.get('/', verify, async (req, res) => {
-    const findContacts = await Contacts.find()
+    const findContacts = await Contacts.find().sort({'first_name' : 1, 'last_name' : 1});  
     if (findContacts != 0) {
         res.json(findContacts);
     } else {
