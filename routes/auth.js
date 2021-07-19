@@ -18,7 +18,7 @@ router.post('/register', async (req, res) => {
     if (error) return res.status(400).json({ 'error': error.details[0].message });
 
     //CHECK IF USER ALREADY EXIST
-    const accountExist = await User.findOne({
+    const accountExist = await User.find({
         name: req.body.name,
         email: req.body.email
     });
