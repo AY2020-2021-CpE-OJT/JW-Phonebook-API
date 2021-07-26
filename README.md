@@ -19,33 +19,19 @@
 |/api/posts   | Main Route For Contacts Routes        |
 
 #### User Login & Registration Routes
-+------------+------------------------------------+--------------------------------------------------------------------------------------------------+
-| Routes     | Description                        | Validation                                                                                       |
-+============+====================================+==================================================================================================+
-| ./login    | User can **Login**                 | * Checks If Email is Correct, Exists and is Valid (char length, type String, Joi type Email)     |              
-|            |                                    | * Checks If Password is Correct, Exists and is Valid (char length, type String)                  |   
-+------------+------------------------------------+--------------------------------------------------------------------------------------------------+
-| ./register | User can **Register**              | * Checks If Username is Correct, Exists and is Valid (char length, type String)                  |
-|            |                                    | * Checks If Email is Correct, Exists and is Valid (char length, type String, Joi type Email)     |
-|            |                                    | * Checks If Password is Correct, Exists and is Valid (char length, type String)                  |
-+------------+------------------------------------+--------------------------------------------------------------------------------------------------+
+| Routes     | Description           | Validation                                                                                   |
+|------------|-----------------------|----------------------------------------------------------------------------------------------|
+| ./login    | User can **Login**    | * Checks If Email is Correct, Exists and is Valid (char length, type String, Joi type Email)<br>* Checks If Password is Correct, Exists and is Valid (char length, type String) |
+| ./register | User can **Register** | * Checks If Username is Correct, Exists and is Valid (char length, type String)<br>* Checks If Email is Correct, Exists and is Valid (char length, type String, Joi type Email)<br>* Checks If Password is Correct, Exists and is Valid (char length, type String) |
 
 #### Contacts Routes
-+----------------+------------------------------------+--------------------------------------------------------------------------------------------------+---------+
-| Routes         | Description                        | Validation                                                                                       | Token   |
-+================+====================================+==================================================================================================+=========+
-| ./             |**Get** All Contacts                | * Checks If DB is Empty                                                                          |required |      
-+----------------+------------------------------------+--------------------------------------------------------------------------------------------------+---------+
-| ./new          |**Create** New Contact              | * Checks if data [firstname, lastname, phonenumbers] are valid (char length, type String)        |required |
-|                |                                    | * Checks if Duplicate Contact via firstname and lastname                                         |         |
-+----------------+------------------------------------+--------------------------------------------------------------------------------------------------+---------+
-| ./get/:id      |**Get Specific** Contact via _id    | N/A                                                                                              |required |
-+----------------+------------------------------------+--------------------------------------------------------------------------------------------------+---------+
-| ./delete/:id   |**Delete Specific** Contact via _id | N/A                                                                                              |required |
-+----------------+------------------------------------+--------------------------------------------------------------------------------------------------+---------+
-| ./update/:id   |**Update Specific** Contact via _id | * Checks if data [firstname, lastname, phonenumbers] are valid (char length, type String)        |required |
-|                |                                    | * Checks if Duplicate Contact via firstname and lastname                                         |         |
-+----------------+------------------------------------+--------------------------------------------------------------------------------------------------+---------+
+| Routes       | Description                         | Validation                                                                                | Token    |
+|--------------|-------------------------------------|-------------------------------------------------------------------------------------------|----------|
+| ./           | **Get** All Contacts                | * Checks If DB is Empty                                                                   | required |
+| ./new        | **Create** New Contact              | * Checks if data [firstname, lastname, phonenumbers] are valid (char length, type String)<br>* Checks if Duplicate Contact via firstname and lastname | required |
+| ./get/:id    | **Get Specific** Contact via _id    | N/A                                                                                       | required |
+| ./delete/:id | **Delete Specific** Contact via _id | N/A                                                                                       | required |
+| ./update/:id | **Update Specific** Contact via _id | * Checks if data [firstname, lastname, phonenumbers] are valid (char length, type String)<br>* Checks if Duplicate Contact via firstname and lastname | required |
 
 # MongoDB Schema
 #### User Schema
