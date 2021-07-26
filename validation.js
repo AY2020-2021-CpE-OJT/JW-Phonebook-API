@@ -44,6 +44,25 @@ const contactValidation = (data) => {
     });
     return schema.validate(data);
 }
+const registerNewValidation = (data) => {
+    const schema = Joi.object({
+        username: Joi.string()
+            .min(6)
+            .required(),
+        name: Joi.array().items(Joi.string()
+            .min(3)
+            .required()),
+        email: Joi.string()
+            .min(6)
+            .required()
+            .email(),
+        password: Joi.string()
+            .min(6)
+            .required()
+    });
+    return schema.validate(data);
+}
 module.exports.registerValidation = registerValidation;
+module.exports.registerNewValidation = registerNewValidation;
 module.exports.loginValidation = loginValidation;
 module.exports.contactValidation = contactValidation;
