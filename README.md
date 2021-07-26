@@ -35,7 +35,7 @@
 
 # MongoDB Schema
 #### User Schema
-```ruby
+```
     name: {
         type: String,
         required: true,
@@ -60,7 +60,7 @@
     }
 ```
 #### Contacts Schema
-```ruby
+```
     phone_numbers: {
         type: [String],
         required:true,
@@ -82,7 +82,7 @@
 ```
 # Joi Schema
 #### User Login Schema
-```ruby
+```
 email: Joi.string()
     .min(6)
     .required()
@@ -92,7 +92,7 @@ password: Joi.string()
     .required()
 ```
 #### User Register Schema
-```ruby
+```
 name: Joi.string()
     .min(6)
     .required(),
@@ -105,7 +105,7 @@ password: Joi.string()
     .required()
 ```
 #### Contacts Schema
-```ruby
+```
 first_name: Joi.string()
     .min(3)
     .required(),
