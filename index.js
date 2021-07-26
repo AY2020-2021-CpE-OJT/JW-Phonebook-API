@@ -9,11 +9,11 @@ const port = process.env.PORT || 8080;
 
 //Import Routes
 const authRoute = require('./routes/auth');
-const contactsRoute = require('./routes/contacts')
+const contactsRoute = require('./routes/contacts');
 dotenv.config();
 
 app.listen(port, () => {
-    console.log('Server is running [', port, ']')
+    console.log('Server is running [', port, ']');
 });
 //Connect to DB
 require('./initDB')();
