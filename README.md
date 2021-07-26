@@ -35,54 +35,54 @@
 
 # MongoDB Schema
 #### User Schema
-```
-    name: {
-        type: String,
-        required: true,
-        min: 6,
-        max: 255
-    },
-    email: {
-        type: String,
-        required: true,
-        min: 6,
-        max: 255
-    },
-    password: {
-        type: String,
-        required: true,
-        min: 6,
-        max: 1024
-    },
-    date: {
-        type: Date,
-        default: Date.now
-    }
+```ruby
+name: {
+    type: String,
+    required: true,
+    min: 6,
+    max: 255
+},
+email: {
+    type: String,
+    required: true,
+    min: 6,
+    max: 255
+},
+password: {
+    type: String,
+    required: true,
+    min: 6,
+    max: 1024
+},
+date: {
+    type: Date,
+    default: Date.now
+}
 ```
 #### Contacts Schema
-```
-    phone_numbers: {
-        type: [String],
-        required:true,
-        min: 8,
-        max: 13
-    },
-    last_name: {
-        type: String,
-        required:true,
-        min: 3,
-        max: 255
-    },
-    first_name: {
-        type: String,
-        required:true,
-        min: 3,
-        max: 255
-    }
+```ruby
+phone_numbers: {
+    type: [String],
+    required:true,
+    min: 8,
+    max: 13
+},
+last_name: {
+    type: String,
+    required:true,
+    min: 3,
+    max: 255
+},
+first_name: {
+    type: String,
+    required:true,
+    min: 3,
+    max: 255
+}
 ```
 # Joi Schema
 #### User Login Schema
-```
+```ruby
 email: Joi.string()
     .min(6)
     .required()
@@ -92,7 +92,7 @@ password: Joi.string()
     .required()
 ```
 #### User Register Schema
-```
+```ruby
 name: Joi.string()
     .min(6)
     .required(),
@@ -105,7 +105,7 @@ password: Joi.string()
     .required()
 ```
 #### Contacts Schema
-```
+```ruby
 first_name: Joi.string()
     .min(3)
     .required(),
