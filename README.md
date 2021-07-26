@@ -1,5 +1,5 @@
 # JW-Phonebook-API
-**A CRUD REST API** for the **Phonebook Application**. This serves as the **backend** of the Phonebook Application using **Node.js, Express, Mongoose, and MongoDB Atlas**. It uses **JSON Web Tokens** Libraries for Token Signing/Verification
+**A CRUD REST API** for the [[Phonebook Application](https://github.com/AY2020-2021-CpE-OJT/jw-phonebookapp-005)]. This serves as the **backend** of the Application it uses **Express and CORS middleware**, **Mongoose**, **MongoDB Atlas**, **Joi**, and **JSON Web Token**. It features **C**reate, **R**ead, **U**pdate and **D**elete with **JSON Web Tokens** Libraries for Token Signing/Verification as a **Authentication** and **Validation**.
 
 # Features
 1. Allow User to **Register with Validation**, and **Password Hashing**.
@@ -10,6 +10,126 @@
 6. **Patch/Update Specific Contact** using **ID** with **Token Verification**.
 7. **Delete Specific Contact** using **ID** with **Token Verification**.
 
+# Routes
+#### Main Routes
+|Routes | Description     |
+|---- | ------------ |
+|/    | N/A      |
+|/api/user   | Main Route For User Login & Registration Routes  |
+|/api/posts   | Main Route For Contacts Routes        |
+
+#### User Login & Registration Routes
++------------+------------------------------------+--------------------------------------------------------------------------------------------------+
+| Routes     | Description                        | Validation                                                                                       |
++============+====================================+==================================================================================================+
+| ./login    | User can **Login**                 | * Checks If Email is Correct, Exists and is Valid (char length, type String, Joi type Email)     |              
+|            |                                    | * Checks If Password is Correct, Exists and is Valid (char length, type String)                  |   
++------------+------------------------------------+--------------------------------------------------------------------------------------------------+
+| ./register | User can **Register**              | * Checks If Username is Correct, Exists and is Valid (char length, type String)                  |
+|            |                                    | * Checks If Email is Correct, Exists and is Valid (char length, type String, Joi type Email)     |
+|            |                                    | * Checks If Password is Correct, Exists and is Valid (char length, type String)                  |
++------------+------------------------------------+--------------------------------------------------------------------------------------------------+
+
+#### Contacts Routes
++----------------+------------------------------------+--------------------------------------------------------------------------------------------------+---------+
+| Routes         | Description                        | Validation                                                                                       | Token   |
++================+====================================+==================================================================================================+=========+
+| ./             |**Get** All Contacts                | * Checks If DB is Empty                                                                          |required |      
++----------------+------------------------------------+--------------------------------------------------------------------------------------------------+---------+
+| ./new          |**Create** New Contact              | * Checks if data [firstname, lastname, phonenumbers] are valid (char length, type String)        |required |
+|                |                                    | * Checks if Duplicate Contact via firstname and lastname                                         |         |
++----------------+------------------------------------+--------------------------------------------------------------------------------------------------+---------+
+| ./get/:id      |**Get Specific** Contact via _id    | N/A                                                                                              |required |
++----------------+------------------------------------+--------------------------------------------------------------------------------------------------+---------+
+| ./delete/:id   |**Delete Specific** Contact via _id | N/A                                                                                              |required |
++----------------+------------------------------------+--------------------------------------------------------------------------------------------------+---------+
+| ./update/:id   |**Update Specific** Contact via _id | * Checks if data [firstname, lastname, phonenumbers] are valid (char length, type String)        |required |
+|                |                                    | * Checks if Duplicate Contact via firstname and lastname                                         |         |
++----------------+------------------------------------+--------------------------------------------------------------------------------------------------+---------+
+
+# MongoDB Schema
+#### User Schema
+```ruby
+    name: {
+        type: String,
+        required: true,
+        min: 6,
+        max: 255
+    },
+    email: {
+        type: String,
+        required: true,
+        min: 6,
+        max: 255
+    },
+    password: {
+        type: String,
+        required: true,
+        min: 6,
+        max: 1024
+    },
+    date: {
+        type: Date,
+        default: Date.now
+    }
+```
+#### Contacts Schema
+```ruby
+    phone_numbers: {
+        type: [String],
+        required:true,
+        min: 8,
+        max: 13
+    },
+    last_name: {
+        type: String,
+        required:true,
+        min: 3,
+        max: 255
+    },
+    first_name: {
+        type: String,
+        required:true,
+        min: 3,
+        max: 255
+    }
+```
+# Joi Schema
+#### User Login Schema
+```ruby
+email: Joi.string()
+    .min(6)
+    .required()
+    .email(),
+password: Joi.string()
+    .min(6)
+    .required()
+```
+#### User Register Schema
+```ruby
+name: Joi.string()
+    .min(6)
+    .required(),
+email: Joi.string()
+    .min(6)
+    .required()
+    .email(),
+password: Joi.string()
+    .min(6)
+    .required()
+```
+#### Contacts Schema
+```ruby
+first_name: Joi.string()
+    .min(3)
+    .required(),
+last_name: Joi.string()
+    .min(3)
+    .required(),
+phone_numbers: Joi.array()
+    .items(Joi.string().min(8))
+    .required()
+```
 # Logs
 ># Initial State v.0.1
 >
